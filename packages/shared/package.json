@@ -1,0 +1,23 @@
+{
+  "name": "@event-manager/shared",
+  "version": "1.0.0",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.cjs.json",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}
