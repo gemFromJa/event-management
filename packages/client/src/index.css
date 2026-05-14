@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+:root {
+  --header-height: 68px;
+}
+
+@layer utilities {
+  .max-w-content {
+    max-width: theme(maxWidth.4xl);
+  }
+
+  .top-header {
+    top: var(--header-height);
+  }
+}

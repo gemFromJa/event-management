@@ -1,0 +1,42 @@
+{
+  "name": "@event-manager/client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "pnpm --filter @event-manager/shared build",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@event-manager/shared": "workspace:*",
+    "@tanstack/react-query": "^5.100.9",
+    "amazon-cognito-identity-js": "^6.3.16",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-query": "link:@types/@tanstack/react-query",
+    "react-router-dom": "^7.15.0",
+    "vitest": "^4.1.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "jsdom": "^29.1.1",
+    "tailwindcss": "^4.3.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.10"
+  }
+}
