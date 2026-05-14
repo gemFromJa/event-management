@@ -8,8 +8,10 @@
     "deploy:frontend": "pnpm build && pnpm --filter infra cdk deploy FrontendStack",
     "deploy": "pnpm deploy:infra && pnpm deploy:frontend",
     "sync-env": "pnpm --filter infra sync-env",
-    "dev": "pnpm --filter client dev",
-    "test": "pnpm --filter server test && pnpm --filter client test"
+    "test": "pnpm --filter server test && pnpm --filter client test",
+    "dev": "concurrently \"pnpm dev:api\" \"pnpm --filter client dev\"",
+    "dev:cli": "pnpm --filter infra synth && sam local start-api --config-file packages/infra/samconfig.toml",
+    "dev:client": "pnpm --filter client dev"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +27,8 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

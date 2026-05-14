@@ -1,0 +1,7 @@
+version = 0.1
+
+[default.local_start_api.parameters]
+template = "packages/infra/cdk.out/ServerStack.template.json"
+env_vars = "packages/infra/env.local.json"
+port = 3001
+warm_containers = "EAGER"

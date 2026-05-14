@@ -10,6 +10,7 @@ A serverless event platform for anime and movie events. Organizers create and ma
 - pnpm 9+ — `npm install -g pnpm`
 - AWS CLI v2 — configured with `aws configure`
 - AWS CDK v2 — `npm install -g aws-cdk`
+- AWS SAM CLI — `brew install aws/tap/aws-sam-cli`
 
 ---
 
@@ -35,7 +36,12 @@ pnpm install
 
 # 2. Bootstrap CDK (once per AWS account)
 cdk bootstrap aws://YOUR_ACCOUNT_ID/us-east-1
+
+# 3. Deploy infrastructure (required before running locally)
+pnpm deploy:infra
 ```
+
+`deploy:infra` creates the DynamoDB tables, Cognito user pool and API Gateway, then writes `packages/client/.env` automatically.
 
 ---
 
@@ -71,13 +77,25 @@ After `deploy:infra` completes, `packages/client/.env` is written automatically 
 
 ---
 
-## Run Locally
+## Local Development
+
+Local Lambda functions run via SAM CLI and connect to your real AWS DynamoDB and Cognito. Deploy the infrastructure at least once before running locally.
 
 ```bash
+# runs frontend + local API together
 pnpm dev
+
+# run local API only (SAM)
+pnpm dev:cli
+
+# run frontend only
+pnpm dev:client
 ```
 
-App runs at `http://localhost:5173`. Requires `packages/client/.env` to exist — run `pnpm deploy:infra` first.
+- Frontend runs at `http://localhost:5173`
+- Local API runs at `http://localhost:3001`
+
+The frontend automatically uses the local API in dev mode via `packages/client/.env.local`.
 
 ---
 
@@ -107,6 +125,9 @@ Deploy the infra stacks first: `pnpm deploy:infra`
 **Client shows blank page or API errors**
 Run `pnpm deploy:infra` to regenerate `packages/client/.env`, then restart dev server.
 
+**Local API not connecting to DynamoDB**
+Ensure `DbStack` and `AuthStack` are deployed and `packages/infra/env.local.json` has the correct table names and Cognito IDs.
+
 **Login always returns 401**
 Check the `Authorization` header is sending the access token not the ID token. Tokens expire after 1 hour — try logging out and back in.
 
@@ -114,7 +135,6 @@ Check the `Authorization` header is sending the access token not the ID token. T
 In sandbox mode, both sender and recipient emails must be verified in AWS Console → SES → Verified Identities.
 
 **`esbuild` not found during deploy**
-
 ```bash
 pnpm add -D esbuild --filter infra
 ```
