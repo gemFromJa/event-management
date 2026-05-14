@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy:infra": "pnpm --filter infra deploy && pnpm sync-env",
-    "deploy:frontend": "pnpm build && pnpm --filter infra cdk deploy FrontendStack",
+    "deploy:frontend": "pnpm --filter client build && pnpm --filter infra cdk deploy FrontendStack",
     "deploy": "pnpm deploy:infra && pnpm deploy:frontend",
     "sync-env": "pnpm --filter infra sync-env",
     "test": "pnpm --filter server test && pnpm --filter client test",
