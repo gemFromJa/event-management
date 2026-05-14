@@ -75,7 +75,7 @@ export default function EventModal({ event, onClose }: Props) {
 
   function handleJoin() {
     if (!user) {
-      navigate("/auth");
+      navigate("/auth/login");
       onClose();
       return;
     }
