@@ -25,14 +25,14 @@ export const handler = async (
     ? JSON.parse(Buffer.from(data.cursor, "base64").toString("utf-8"))
     : undefined;
 
-  const { query, attributes } = buildQuery(data);
+  const { query, attributes, expressionAttributeNames } = buildQuery(data);
   const filterParams = query
     ? {
         FilterExpression: query,
         ExpressionAttributeValues: attributes,
-        ExpressionAttributeNames: {
-          "#dt": "date",
-        },
+        ...(expressionAttributeNames && {
+          ExpressionAttributeNames: expressionAttributeNames,
+        }),
       }
     : {};
 

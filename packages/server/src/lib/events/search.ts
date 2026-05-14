@@ -3,6 +3,7 @@ import type { SearchEventsInput } from "@event-manager/shared";
 export const buildQuery = (data: SearchEventsInput) => {
   const query: string[] = [];
   const attributes: Record<string, string | number> = {};
+  let expressionAttributeNames: Record<string, string> | null = null;
 
   if (data.title) {
     query.push("contains(titleLower, :title)");
@@ -12,6 +13,10 @@ export const buildQuery = (data: SearchEventsInput) => {
   if (data.category && data.category !== "All") {
     query.push("category = :category");
     attributes[":category"] = data.category.toLowerCase();
+  }
+
+  if (data.date || data.dateFrom || data.dateTo) {
+    expressionAttributeNames = { "#dt": "date" };
   }
 
   if (data.date) {
@@ -29,5 +34,5 @@ export const buildQuery = (data: SearchEventsInput) => {
     attributes[":end"] = data.dateTo;
   }
 
-  return { query: query.join(" AND "), attributes };
+  return { query: query.join(" AND "), attributes, expressionAttributeNames };
 };
