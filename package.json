@@ -1,0 +1,29 @@
+{
+  "name": "event-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy:infra": "pnpm --filter infra deploy && pnpm sync-env",
+    "deploy:frontend": "pnpm build && pnpm --filter infra cdk deploy FrontendStack",
+    "deploy": "pnpm deploy:infra && pnpm deploy:frontend",
+    "sync-env": "pnpm --filter infra sync-env",
+    "dev": "pnpm --filter client dev",
+    "test": "pnpm --filter server test && pnpm --filter client test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.0.8",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0"
+  }
+}

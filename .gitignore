@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build outputs
+dist/
+cdk.out/
+.tsbuildinfo
+*.tsbuildinfo
+
+# environment
+.env
+.env.*.bak
+packages/client/.env
+
+# AWS CDK
+cdk.out/
+cdk.context.json
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# test coverage
+coverage/
