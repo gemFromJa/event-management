@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "pnpm --filter shared build && pnpm --filter infra build && pnpm --filter client build",
     "deploy:infra": "pnpm --filter infra deploy && pnpm sync-env",
     "deploy:frontend": "pnpm --filter client build && pnpm --filter infra cdk deploy FrontendStack",
     "deploy": "pnpm deploy:infra && pnpm deploy:frontend",
