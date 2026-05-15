@@ -56,7 +56,7 @@ async function main() {
 
   for (const output of allOutputs) {
     const key = output.OutputKey;
-    const value = output.OutputValue;
+    const value = output.OutputValue?.replace(/\/$/, "");
 
     if (!key || !value) continue;
 
