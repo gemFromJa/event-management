@@ -11,6 +11,7 @@ A serverless event platform for anime and movie events. Organizers create and ma
 - AWS CLI v2 — configured with `aws configure`
 - AWS CDK v2 — `npm install -g aws-cdk`
 - AWS SAM CLI — `brew install aws/tap/aws-sam-cli`
+- AWS account setup — `aws configure`
 
 ---
 
@@ -34,11 +35,14 @@ FROM_EMAIL=your-verified-ses-email@example.com
 # 1. Install dependencies
 pnpm install
 
-# 2. Bootstrap CDK (once per AWS account)
-cdk bootstrap aws://YOUR_ACCOUNT_ID/us-east-1
+# 2. Build project deps
+pnpm build
 
 # 3. Deploy infrastructure (required before running locally)
 pnpm deploy:infra
+
+# 4. Run client locally
+pnpm dev:client
 ```
 
 `deploy:infra` creates the DynamoDB tables, Cognito user pool and API Gateway, then writes `packages/client/.env` automatically.
@@ -85,7 +89,7 @@ Local Lambda functions run via SAM CLI and connect to your real AWS DynamoDB and
 # runs frontend + local API together
 pnpm dev
 
-# run local API only (SAM)
+# run local API only (AWS SAM)
 pnpm dev:cli
 
 # run frontend only
@@ -96,6 +100,8 @@ pnpm dev:client
 - Local API runs at `http://localhost:3001`
 
 The frontend automatically uses the local API in dev mode via `packages/client/.env.local`.
+
+Create it manually and update following .env.example
 
 ---
 
